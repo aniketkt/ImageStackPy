@@ -17,7 +17,6 @@ ObjectTracking.py file includes an object tracking algorithm using normalized cr
 
 I define an image stack as a python list of 2D numpy arrays with identical shape - I(Z,Y,X). The 'Z axis' is the python list.
 
-Credits: Dr. Andy Swantek and Dr. Brandon Sforzo contributed many essential ideas that went into the code.
 Installation:
 Use python 3.3+ 
 In an environment type,
