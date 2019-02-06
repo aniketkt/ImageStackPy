@@ -17,7 +17,7 @@ setup(
     # Needed to actually package something
     packages=['ImageStackPy'],
     # Needed for dependencies
-    install_requires=['numpy'],
+    install_requires=['numpy', 'scikit-learn', 'scikit-image', 'matplotlib', 'opencv'],
     # *strongly* suggested for sharing
     version='0.1',
     # The license can be anything you like
