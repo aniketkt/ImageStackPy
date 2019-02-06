@@ -24,5 +24,5 @@ setup(
     license='none',
     description='Fast, parallelized image processing and viewing of large greyscale image stacks. Includes an object tracking toolkit',
     # We will also need a readme eventually (there will be a warning)
-    long_description=open('README.txt').read(),
+    long_description=open('README.md').read(),
 )
