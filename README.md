@@ -19,5 +19,8 @@ Define an image stack as a python list of 2D numpy arrays with identical shape -
 
 Example:
 import ImageProcessing as IP
+
 Im_Stack = IP.get_stack(userfilepath = "Enter path")
+
 Im_Stack = IP.XY_gaussianBlur(Im_Stack, X_kern_size = 3, Y_kern_size = 3)
+
