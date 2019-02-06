@@ -7,11 +7,9 @@ Created on Thu Aug 30 16:33:32 2018
 
 This is a collection of functions that perform image processing operations on stacks of 16 bit images.
 Function in this file include filters, image arithmetic calculations, normalization, etc.
-ImageJ is great for image processing.
-The motivation behind writing these functions is to be able to automate image processing procedures on large data sets using python.
-Another motivation is, in the future, to be able to apply advance machine vision techniques available in various python libraries on 16 bit images.
+ImageJ is great for image processing. The motivation behind writing these functions is to be able to automate image processing procedures on large data sets using python.
 The functions are parallelized using multiprocessing library and are optimized for computers with several CPUs.
-Acknowledgements to Brandon Sforzo and Andy Swantek for several ideas implemented herein.
+Credits: Dr. Andy Swantek and Dr. Brandon Sforzo contributed many essential ideas that went into the code.
 """
 
 # Save / Read images stuff
