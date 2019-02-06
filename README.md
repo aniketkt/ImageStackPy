@@ -18,6 +18,7 @@ ObjectTracking.py file includes an object tracking algorithm using normalized cr
 Define an image stack as a python list of 2D numpy arrays with identical shape - I(Z,Y,X). The 'Z axis' is the python list.
 
 Example:
+
 import ImageProcessing as IP
 
 Im_Stack = IP.get_stack(userfilepath = "Enter path")
