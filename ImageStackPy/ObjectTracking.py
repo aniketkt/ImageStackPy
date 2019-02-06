@@ -10,7 +10,8 @@ import numpy as np
 from skimage.feature import match_template
 import time
 
-import ImageProcessing as IP
+
+from ImageStackPy import ImageProcessing as IP
 
 DEBUG_MODE = False
 
