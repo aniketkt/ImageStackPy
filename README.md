@@ -15,13 +15,19 @@ The "PyImageProcessing.py" file contains:
 
 ObjectTracking.py file includes an object tracking algorithm using normalized cross-correlation (template matching). Input limits for a bounding box that contains the object in the first frame and find it's motion trajectory through the sequence of images. Output as an XY vector or draw a bounding box over the moving object through the stack of images.
 
-Define an image stack as a python list of 2D numpy arrays with identical shape - I(Z,Y,X). The 'Z axis' is the python list.
+I define an image stack as a python list of 2D numpy arrays with identical shape - I(Z,Y,X). The 'Z axis' is the python list.
+
+Credits: Dr. Andy Swantek and Dr. Brandon Sforzo contributed many essential ideas that went into the code.
+Installation:
+Use python 3.3+ 
+In an environment type,
+pip install git+https://github.com/aniketkt/ImageStackPy.git#egg=ImageStackPy
 
 Example:
+from ImageStackPy import ImageProcessing as IP
+import time
+Im_Stack = IP.get_stack(userfilepath = "path/pathdir")
 
-import ImageProcessing as IP
-
-Im_Stack = IP.get_stack(userfilepath = "Enter path")
-
-Im_Stack = IP.XY_gaussianBlur(Im_Stack, X_kern_size = 3, Y_kern_size = 3)
-
+t0 = time.time()
+Im_Stack1 = IP.XY_gaussianBlur(Im_Stack, X_kern_size = 3, Y_kern_size = 3)
+print("Took %.2f secs"%(time.time() - t0))
