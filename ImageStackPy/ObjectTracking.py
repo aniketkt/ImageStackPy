@@ -4,6 +4,7 @@
 Created on Wed Oct 10 10:56:50 2018
 
 @author: atekawade
+Credits: This code is adapted from Dr. Andy Swantek's algorithm for tracking needle motion in fuel injectors (Argonne National Laboratory).
 """
 
 import numpy as np
