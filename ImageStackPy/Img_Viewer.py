@@ -19,7 +19,7 @@ from matplotlib.widgets import Slider, Button, RadioButtons, SpanSelector
 from matplotlib.figure import Figure
 from matplotlib import patches
 
-import ImageProcessing as IP
+from ImageStackPy import ImageProcessing as IP
 
 
 DEBUG_MODE = False
