@@ -21,15 +21,29 @@ I define an image stack as a python list of 2D numpy arrays with identical shape
 
 Installation:
 Use python 3.3+ 
-In an environment type,\n
+In an environment type,
+
 pip install git+https://github.com/aniketkt/ImageStackPy.git#egg=ImageStackPy
-\n
+
+
 
 Example:
 from ImageStackPy import ImageProcessing as IP
+
 import time
+
 Im_Stack = IP.get_stack(userfilepath = "path/pathdir")
 
 t0 = time.time()
+
 Im_Stack1 = IP.XY_gaussianBlur(Im_Stack, X_kern_size = 3, Y_kern_size = 3)
+
 print("Took %.2f secs"%(time.time() - t0))
+
+
+from ImageStackPy import Img_Viewer as VIEW
+
+Im_Stack1 = IP.toArray(Im_Stack1)
+
+VIEW.viewer(Im_Stack1)
+
