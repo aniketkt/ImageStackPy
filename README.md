@@ -6,21 +6,24 @@ ImageProcessing.py file includes the following important functions, all of them 
  
 The "PyImageProcessing.py" file contains:
 
-1. XY / Z median, Gaussian and mean filters parallelized using multiprocessing.
-2. Point operations: brightness adjustment / normalization, binarization / thresholding, unsharp mask filter.
+1. 3D filters (blur, edge detection, unsharp mask, etc.) parallelized using multiprocessing for Python.
+2. Point operations: brightness adjustment / normalization, binarization / thresholding.
 3. Image calculation: addition, subtraction, division, alphablending - when numpy slows you down.
-4. Read / write image stacks - currently only for tif / tiff format 16 bit image stacks.
+4. Read / write image stacks - tif / tiff format 16 bit image stacks.
 5. Affine transforms - Image rotation / translation / cropping
-6. Edge detection - Sobel, Canny
+
 
 ObjectTracking.py file includes an object tracking algorithm using normalized cross-correlation (template matching). Input limits for a bounding box that contains the object in the first frame and find it's motion trajectory through the sequence of images. Output as an XY vector or draw a bounding box over the moving object through the stack of images.
+
+Img_Viewer.py contains functions to view image stacks in a slider window using matplotlib interactive widgets. You can also view the histogram, plot profile of pixel intensity across images, etc.
 
 I define an image stack as a python list of 2D numpy arrays with identical shape - I(Z,Y,X). The 'Z axis' is the python list.
 
 Installation:
 Use python 3.3+ 
-In an environment type,
+In an environment type,\n
 pip install git+https://github.com/aniketkt/ImageStackPy.git#egg=ImageStackPy
+\n
 
 Example:
 from ImageStackPy import ImageProcessing as IP
