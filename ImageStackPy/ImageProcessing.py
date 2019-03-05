@@ -10,7 +10,13 @@ Function in this file include filters, image arithmetic calculations, normalizat
 ImageJ is great for image processing. The motivation behind writing these functions is to be able to automate image processing procedures on large data sets using python.
 The filters available in this library are built from scipy, scikit-image or opencv and are parallelized using multiprocessing library.
 Credits: Dr. Andy Swantek and Dr. Brandon Sforzo contributed many essential ideas that went into the code.
+
+Edits:
+3/5/2019: Changed the backend for get_stack() to skimage instead of matplotlib to allow for reading 32 bit as well as 16 bit images.
+
 """
+
+
 
 # Save / Read images stuff
 from tifffile import imsave
@@ -27,6 +33,7 @@ from skimage.feature import canny
 import skimage.filters as skimagefilters
 import matplotlib.pyplot as plt
 import numpy.random as rd
+from skimage import io as skimage_io
 
 
 # For parallel processing
@@ -78,7 +85,7 @@ def get_image():
     return plt.imread(ImgFileName)
     
 
-def get_stack(userfilepath = '', procs = -1, nImages = -1):
+def get_stack(userfilepath = '', procs = None, nImages = None, fromto = None):
 
     message(BORDER)
     message("\nReading %s images from disk..."%(nImages if nImages != -1 else 'all'))
@@ -88,7 +95,7 @@ def get_stack(userfilepath = '', procs = -1, nImages = -1):
         error_message("ERROR: File path is required.")
         return []
 
-    if procs == -1:
+    if procs == None:
         procs = multiprocessing.cpu_count()
 
         
@@ -96,8 +103,12 @@ def get_stack(userfilepath = '', procs = -1, nImages = -1):
     
     if not ImgFileList: ImgFileList = sorted(glob.glob(userfilepath+'/*.tiff'))
     
-
-    Im_Stack = Parallelize(ImgFileList if nImages == -1 else ImgFileList[:nImages], plt.imread, procs = procs)
+    if fromto != None:
+        ImgFileList = ImgFileList[fromto[0]:fromto[1]+1]
+    elif nImages != None:
+        ImgFileList = ImgFileList[:nImages]
+    
+    Im_Stack = Parallelize(ImgFileList, skimage_io.imread, procs = procs)
 
     t1 = time.time()
     message("\tDone in %f seconds."%(t1-t0))
