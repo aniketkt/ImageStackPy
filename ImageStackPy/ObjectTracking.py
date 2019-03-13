@@ -57,7 +57,7 @@ def track_original(Im_Stack, ROIX = [0,0], ROIY = [0,0], procs = -1, nref = 0):
     
     t1 = time.time()
     message("\tDone in %f seconds."%(t1-t0))
-    return YX - YX[0,:]
+    return YX - YX[nref,:]
 
 
 
