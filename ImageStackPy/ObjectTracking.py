@@ -38,9 +38,9 @@ def locate(image, template = []):
     return np.unravel_index(np.argmax(match_zone), match_zone.shape)
 
 
-def track_original(Im_Stack, ROIX = [0,0], ROIY = [0,0], procs = -1):
+def track_original(Im_Stack, ROIX = [0,0], ROIY = [0,0], procs = -1, nref = 0):
     
-    # Using a template based on the first frame, tracks the location of the feature in the template in all subsequent frames.
+    # Using a template based on the (nref+1)'th frame, tracks the location of the feature in the template in all subsequent frames.
     # The returned variable is a numpy array of shape [nFrames,2], giving the Y, X "displacement" of the feature in all frames.
     # ROIY & ROIX: Provide the Y and X pixel range to define the region of interest that will move and needs tracking.
     
@@ -52,7 +52,7 @@ def track_original(Im_Stack, ROIX = [0,0], ROIY = [0,0], procs = -1):
         return np.asarray([0,0])
     Im_Stack = IP.check_format(Im_Stack)
     
-    template = IP.crop(IP.check_format(Im_Stack[0]), X = ROIX, Y = ROIY)[0]
+    template = IP.crop(IP.check_format(Im_Stack[nref]), X = ROIX, Y = ROIY)[0]
     YX = np.asarray(IP.Parallelize(Im_Stack, locate, procs = procs, template = template))
     
     t1 = time.time()
