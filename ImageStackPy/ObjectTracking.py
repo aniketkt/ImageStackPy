@@ -50,9 +50,9 @@ def track_original(Im_Stack, ROIX = [0,0], ROIY = [0,0], procs = -1, nref = 0):
     
     if not (any(ROIX) and any(ROIY)):
         return np.asarray([0,0])
-    Im_Stack = IP.check_format(Im_Stack)
+    Im_Stack = IP.toStack(Im_Stack)
     
-    template = IP.crop(IP.check_format(Im_Stack[nref]), X = ROIX, Y = ROIY)[0]
+    template = IP.crop(IP.toStack(Im_Stack[nref]), X = ROIX, Y = ROIY)[0]
     YX = np.asarray(IP.Parallelize(Im_Stack, locate, procs = procs, template = template))
     
     t1 = time.time()
