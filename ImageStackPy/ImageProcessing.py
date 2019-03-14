@@ -106,7 +106,7 @@ def get_stack(userfilepath = '', procs = None, nImages = None, fromto = None):
     if fromto != None:
         ImgFileList = ImgFileList[fromto[0]:fromto[1]+1]
     elif nImages != None:
-        ImgFileList = ImgFileList[:nImages]
+        ImgFileList = ImgFileList[:nImages+1]
     
     Im_Stack = Parallelize(ImgFileList, skimage_io.imread, procs = procs)
 
