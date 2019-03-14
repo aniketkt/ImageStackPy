@@ -327,6 +327,34 @@ def get_profile(Im_Stack, axis = None, X = None, Y = None, Z = None, LogFileName
     
 ###################################################################
 
+def get_EnsembleHyperStack(Im_Stack, FPE, ret_type = INT16):
+    
+    
+    Im_Stack = toStack(Im_Stack)
+    
+    numFullEvents = int(len(Im_Stack)//FPE)
+    message(BORDER)
+    message("\nCalculating mean stack from %i events with %i frames per event"%(numFullEvents, FPE))
+
+    t0 = time.time()
+
+    # Numpy FTW! First slice the stack to eliminate incomplete events
+    Im_Stack = np.asarray(Im_Stack[:numFullEvents*FPE])
+    # Then slice the stack using start:stop:step as ii::FPE. Start at 'ii'th frame, then step FPE frames to next identical frame
+    H = np.asarray([Im_Stack[ii::FPE,:,:] for ii in range(FPE)])
+    # Now you get a 4D array with dim0 as time (length = FPE), dim1 as event (length = numFullEvents), dim2, dim3 as Y, X
+    H = np.swapaxes(H,0,1)
+    
+    # Done. This is done 10 times faster than the best for loop I could come up with.
+    t1 = time.time()
+    message("\tDone in %f seconds."%(t1-t0))
+
+    return H
+
+
+
+
+
 def toStack(Im_Stack):
 
     # Makes Im_Stack a "stack" or python list of images, each image being a 2D np array
