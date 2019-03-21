@@ -120,10 +120,10 @@ def draw_box(Image, W = 0, H = 0, Center = np.array([0,0]), filled = False):
     BOX = (2**16 - 1)*np.ones((box_bottom + box_top + 1,box_right + box_left + 1))
     if filled == False: BOX[3:-3,3:-3] = 0
     
-    pad_right = centerpixel_right - box_right
-    pad_left = centerpixel_left - box_left
-    pad_top = centerpixel_top - box_top
-    pad_bottom = centerpixel_bottom - box_bottom
+    pad_right = int(centerpixel_right - box_right)
+    pad_left = int(centerpixel_left - box_left)
+    pad_top = int(centerpixel_top - box_top)
+    pad_bottom = int(centerpixel_bottom - box_bottom)
     
     BOX = np.pad(BOX,((pad_top,pad_bottom),(pad_left,pad_right)), 'constant', constant_values = 0)
     return BOX
