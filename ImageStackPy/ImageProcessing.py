@@ -140,6 +140,56 @@ def get_random_stack(X_size = 100, Y_size = 100, Z_size = 250):
     return Im_Stack
 
 
+
+def save_stack(Im_Stack, SaveDir = '', increment_flag = False, suffix_len = None):
+    
+    
+    message(BORDER)
+    message("\nSaving %i images to directory..."%(len(Im_Stack)))
+    t0 = time.time()
+    if not SaveDir:
+        error_message("ERROR: Save directory argument not passed. Nothing was saved.")
+        return
+    
+    Im_Stack = to16bit(Im_Stack)
+    
+    if not suffix_len:
+        if increment_flag:
+            message("ERROR: suffix_len argument required if increment_flag is True.")
+            return
+        else:
+            suffix_len = len(str(len(Im_Stack)))
+    
+    last_num = 0
+    if not os.path.exists(SaveDir):
+        os.makedirs(SaveDir)
+    else:
+        if not increment_flag:
+            shutil.rmtree(SaveDir)
+            os.makedirs(SaveDir)
+        else:
+            ImgFileList = sorted(glob.glob(userfilepath+'/*.tif'))
+            if not ImgFileList: ImgFileList = sorted(glob.glob(userfilepath+'/*.tiff'))
+            last_num = int(ImgFileList[-1].split('.')[0][-suffix_len:])
+            
+    BaseDirName = os.path.basename(os.path.normpath(SaveDir))
+    
+    for iS, Img in enumerate(Im_Stack):
+        img_num = str(iS+1+last_num).zfill(suffix_len)
+        imsave(SaveDir + '/' + BaseDirName + img_num + '.tif', Img)
+
+    t1 = time.time()
+    
+    message("\tDone in %f seconds."%(t1-t0))
+
+    return
+
+
+
+
+
+
+"""
 def save_stack(Im_Stack, SaveDir = ''): #Pass LogFileName as savedir for PyNM_FULLAUTO
     
     message(BORDER)
@@ -166,6 +216,8 @@ def save_stack(Im_Stack, SaveDir = ''): #Pass LogFileName as savedir for PyNM_FU
     message("\tDone in %f seconds."%(t1-t0))
 
     return
+"""
+
 
 def save_image(Img, SaveFileName = ''):
 
