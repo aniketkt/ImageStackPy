@@ -55,6 +55,8 @@ from tkinter import filedialog as tkFileDialog
 # Some variables we will use
 FLOAT32 = 'float 32 data type'
 INT16 = '16 bit integer data type'
+INT8 = '8 bit integer data type'
+
 BORDER = '\n' + '#'*70
 DEBUG_MODE = False # Suppress print input / output
 
@@ -142,7 +144,7 @@ def get_random_stack(X_size = 100, Y_size = 100, Z_size = 250):
 
 
 
-def save_stack(Im_Stack, SaveDir = '', increment_flag = False, suffix_len = None):
+def save_stack(Im_Stack, SaveDir = '', increment_flag = False, suffix_len = None, dtype = INT16):
     
     
     message(BORDER)
@@ -152,7 +154,12 @@ def save_stack(Im_Stack, SaveDir = '', increment_flag = False, suffix_len = None
         error_message("ERROR: Save directory argument not passed. Nothing was saved.")
         return
     
-    Im_Stack = to16bit(Im_Stack)
+   if dtype == INT8:
+        Im_Stack = to8bit(Im_Stack)
+   else
+        Im_Stack = to16bit(Im_Stack)
+   
+    
     
     if not suffix_len:
         if increment_flag:
