@@ -478,6 +478,42 @@ def to16bit(Im_Stack, auto_adjust = False, method = None, norm_type = "global"):
     
     return Im_Stack
 
+def to8bit(Im_Stack, auto_adjust = False, method = None, norm_type = "global"):
+    
+    
+    # Type casting to 8 bit with multiple options:
+    # auto_adjust: If False, checks if input is already 8 bit and returns quickly without scaling or clamping the values over 0,2**8-1
+    # method: Choose "normalize" if data should be scaled to full range (0,2**8-1) or "clamp" to clamp within that range
+    
+    bit_type = 2**8 - 1
+    Im_Stack = toStack(Im_Stack)
+
+    if (type(Im_Stack[0][0,0]) is np.uint8) and (auto_adjust is False):
+        return Im_Stack
+
+    
+    if method == None or method == "clamp":
+        Im_Stack = clamp(Im_Stack, limit_low = 0, limit_high = bit_type)
+    elif method == "normalize":
+        Im_Stack = normalize(Im_Stack, norm_type = norm_type, amax = bit_type)
+    else:
+        error_message("ERROR: argument 'norm_type' not recognized.")
+        return []
+    
+    Im_Stack = np.asarray(Im_Stack).astype(np.uint8)
+    Im_Stack = toStack(Im_Stack)
+    
+    return Im_Stack
+
+
+
+
+
+
+
+
+
+
 
 def normalize(Im_Stack, norm_type = "global", amin = 0, amax = 2**16 - 1):
 
