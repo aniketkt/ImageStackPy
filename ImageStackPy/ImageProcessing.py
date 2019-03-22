@@ -154,11 +154,11 @@ def save_stack(Im_Stack, SaveDir = '', increment_flag = False, suffix_len = None
         error_message("ERROR: Save directory argument not passed. Nothing was saved.")
         return
     
-   if dtype == INT8:
+    if dtype == INT8:
         Im_Stack = to8bit(Im_Stack)
-   else
+    else
         Im_Stack = to16bit(Im_Stack)
-   
+
     
     
     if not suffix_len:
