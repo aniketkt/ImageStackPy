@@ -13,7 +13,7 @@ http://www.astroml.org/book_figures/chapter4/fig_GMM_1D.html
 
 The general procedure is as follows
 from ImageStackPy import ImageProcessing as IP
-from ImageStackPy import GMM_Segmenter3D as Segmenter
+from ImageStackPy import GMM_Segmenter3D as SG
 from ImageStackPy import Img_Viewer as VIEW
 
 #Load the volume "R" as a 3D numpy array. Then slice the volume to downsize it as:
@@ -28,17 +28,17 @@ VIEW.plot_histogram(r)
 #Notice that we have removed zeroes from the fit. This is not required.
 #But in some cases, there are zero value pixels on the boundaries of a volume because you may have cropped or rotated.
 
-N_list, BIC, models = GMM_test(r[r!=0].reshape(-1,1), n_models = 7)
+N_list, BIC, models = SG.GMM_test(r[r!=0].reshape(-1,1), n_models = 5)
 
 #View how the models fit for various N's (where N is the number of components assumed in the GMM). [4,6] is the range you want to see.
-show_modelfit(r[r!=0].reshape(-1,1), models, N_plots = [4,6])
+SG.show_modelfit(r[r!=0].reshape(-1,1), models, N_plots = [2,4])
 
 #View the BIC plot
-show_BICplot(N_list, BIC)
+SG.show_BICplot(N_list, BIC)
 
 # When you are ready, run the segmenter. It will automatically save tiff stacks for the segmented data if you pass argument "SaveDir"
 # Note that if SaveDir argument is passed, nothing is return to conserve RAM.
-C = run_segmenter(R, N = 8, n_high = 57, thresh_proba = 0.95, n_chunks = 4)
+C = run_segmenter(R, N = 8, n_high = 3, thresh_proba = 0.95, n_chunks = 4)
 
 
 # Eliminate speckles, if needed
@@ -180,7 +180,7 @@ def make_chunks(R, n_chunks):
     return C
 
 
-def run_segmenter(R, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1, SaveDir = None):
+def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1, SaveDir = None):
     
     t0 = time.time()
     
