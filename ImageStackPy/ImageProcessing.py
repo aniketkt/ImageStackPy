@@ -156,7 +156,7 @@ def save_stack(Im_Stack, SaveDir = '', increment_flag = False, suffix_len = None
     
     if dtype == INT8:
         Im_Stack = to8bit(Im_Stack)
-    else
+    else:
         Im_Stack = to16bit(Im_Stack)
 
     
