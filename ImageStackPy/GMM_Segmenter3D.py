@@ -191,8 +191,9 @@ def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1
                                n_highest = n_high,
                                thresh_proba = thresh_proba)
 
-        
+    nz, ny, nx = R.shape        
     R_chunk = make_chunks(R, n_chunks)
+    del R
     
     print("Working on %i chunks of data shape "%n_chunks + str(R_chunk[0].shape))
     for ii in range(n_chunks):
@@ -210,7 +211,7 @@ def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1
             IP.save_stack(C_chunk,
                           SaveDir = SaveDir,
                           increment_flag = increment_flag,
-                          suffix_len = len(str(R.shape[0])))
+                          suffix_len = len(str(nz)))
             C = np.copy(C_chunk)
         
         del C_chunk
