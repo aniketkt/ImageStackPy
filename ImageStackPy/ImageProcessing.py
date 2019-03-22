@@ -176,9 +176,12 @@ def save_stack(Im_Stack, SaveDir = '', increment_flag = False, suffix_len = None
             shutil.rmtree(SaveDir)
             os.makedirs(SaveDir)
         else:
-            ImgFileList = sorted(glob.glob(userfilepath+'/*.tif'))
-            if not ImgFileList: ImgFileList = sorted(glob.glob(userfilepath+'/*.tiff'))
-            last_num = int(ImgFileList[-1].split('.')[0][-suffix_len:])
+            ImgFileList = sorted(glob.glob(SaveDir+'/*.tif'))
+            if not ImgFileList: ImgFileList = sorted(glob.glob(SaveDir+'/*.tiff'))
+            if not ImgFileList:
+                last_num = 0
+            else:
+                last_num = int(ImgFileList[-1].split('.')[0][-suffix_len:])
             
     BaseDirName = os.path.basename(os.path.normpath(SaveDir))
     
