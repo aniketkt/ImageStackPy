@@ -112,7 +112,7 @@ def show_modelfit(data, models, N_plots = None):
         h = ax[ii].hist(data, bins = 500, normed = True, alpha = 0.4)
         x= h[1]
         if ii != len(ax)-1:
-            ax[ii].set_xticks([])
+            ani = None#ax[ii].set_xticks([])
         else:
             ax[ii].set_xlabel("Voxel Intensity", fontsize = 12)
         ax[ii].set_yticks([])
