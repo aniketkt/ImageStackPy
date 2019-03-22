@@ -194,7 +194,7 @@ def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1
         
     R_chunk = make_chunks(R, n_chunks)
     
-    print("Working on %i chunks of data shape " + str(R_chunk[0].shape))
+    print("Working on %i chunks of data shape "%n_chunks + str(R_chunk[0].shape))
     for ii in range(n_chunks):
         print("Chunk # %i"%(ii+1))
         C_chunk = wrapper(R_chunk[ii])
