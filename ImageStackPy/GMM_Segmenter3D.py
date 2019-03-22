@@ -128,11 +128,11 @@ def show_modelfit(data, models, N_plots = None):
         ax[ii].plot(x, pdf, '--k')
         ax[ii].plot(x, pdf_individual, '--')
         
-def segment_(r, model = None, n_highest=1, thresh_proba = 0.9):
+def segment_(r, model = None, n_highest=1, thresh_proba = 0.1):
     
     p = get_proba(r, model, n_highest = n_highest)
     c = np.zeros_like(p)
-    c[p > 0.9] = 1.0
+    c[p > thresh_proba] = 1.0
     return c
 
 def get_proba(r, model, n_highest=1):
@@ -230,7 +230,6 @@ def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1
 
 
     
-
 
 
 
