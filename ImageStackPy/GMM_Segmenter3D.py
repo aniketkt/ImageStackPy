@@ -191,33 +191,30 @@ def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1
                                n_highest = n_high,
                                thresh_proba = thresh_proba)
 
-    if n_chunks > 1:
         
-        R_chunk = make_chunks(R, n_chunks)
-        
-        print("Working on %i chunks of data shape " + str(R_chunk[0].shape))
-        for ii in range(n_chunks):
-            print("Chunk # %i"%(ii+1))
-            C_chunk = wrapper(R_chunk[ii])
-            
-            if ii == 0:
-                C = np.copy(C_chunk)
-                increment_flag = False
-            else:
-                C = np.concatenate((C,C_chunk), axis = 0)
-                increment_flag = True
-            del C_chunk
-        
-            if SaveDir:
-                IP.save_stack(C_chunk,
-                              SaveDir = SaveDir,
-                              increment_flag = increment_flag,
-                              suffix_len = len(str(R.shape[0])))
-                C = np.copy(C_chunk)
-        
-    else:
-        C = wrapper(R)
+    R_chunk = make_chunks(R, n_chunks)
     
+    print("Working on %i chunks of data shape " + str(R_chunk[0].shape))
+    for ii in range(n_chunks):
+        print("Chunk # %i"%(ii+1))
+        C_chunk = wrapper(R_chunk[ii])
+        
+        if ii == 0:
+            C = np.copy(C_chunk)
+            increment_flag = False
+        else:
+            C = np.concatenate((C,C_chunk), axis = 0)
+            increment_flag = True
+    
+        if SaveDir:
+            IP.save_stack(C_chunk,
+                          SaveDir = SaveDir,
+                          increment_flag = increment_flag,
+                          suffix_len = len(str(R.shape[0])))
+            C = np.copy(C_chunk)
+        
+        del C_chunk
+   
     print("Took %.3f minutes"%((time.time()-t0)/60.0))
     if not SaveDir:
         C = IP.to8bit(C, method = 'clamp')    
