@@ -80,13 +80,12 @@ def get_filepath():
     ImDir = tkFileDialog.askdirectory(title = 'Select the parent analysis directory.')
     return ImDir
 
-def get_image():
-
-    root = TK.Tk()
-    root.withdraw()
-    ImgFileName = tkFileDialog.askopenfilename(title = 'Select the image file.')
-    return plt.imread(ImgFileName)
+def get_image(userfilepath = None):
     
+    if userfilepath:
+        return skimage_io.imread(userfilepath)
+    else:
+        return
 
 def get_stack(userfilepath = '', procs = None, nImages = None, fromto = None):
 
