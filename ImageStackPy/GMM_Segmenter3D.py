@@ -212,19 +212,18 @@ def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1
         print("Chunk # %i"%(ii+1))
         C_chunk = wrapper(R_chunk[ii])
         
-        if ii == 0:
+        if 'C' not in locals():
             C = np.copy(C_chunk)
-            increment_flag = False
         else:
             C = np.concatenate((C,C_chunk), axis = 0)
-            increment_flag = True
-    
+            
+            
         if SaveDir:
             IP.save_stack(C_chunk,
                           SaveDir = SaveDir,
-                          increment_flag = increment_flag,
+                          increment_flag = True,
                           suffix_len = len(str(nz)))
-            C = np.copy(C_chunk)
+            del C
         
         del C_chunk
    
