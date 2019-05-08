@@ -128,11 +128,14 @@ def show_modelfit(data, models, N_plots = None):
         ax[ii].plot(x, pdf, '--k')
         ax[ii].plot(x, pdf_individual, '--')
         
-def segment_(r, model = None, n_highest=1, thresh_proba = 0.1):
+def segment_(r, model = None, n_highest=1, thresh_proba = 0.1, classify = False):
     
-    p = get_proba(r, model, n_highest = n_highest)
-    c = np.zeros_like(p)
-    c[p > thresh_proba] = 1.0
+    if classify:
+        c = get_class(r, model)
+    else:
+        p = get_proba(r, model, n_highest = n_highest)
+        c = np.zeros_like(p)
+        c[p > thresh_proba] = 1.0
     return c
 
 def get_proba(r, model, n_highest=1):
@@ -145,7 +148,16 @@ def get_proba(r, model, n_highest=1):
     
     return p
     
-
+def get_class(r, model):
+    
+    idx = np.argsort(model.means_[:,0])
+    
+    p = model.predict_proba(r.reshape(-1,1))[:,idx]
+    p = np.argmax(r, axis = 1)
+    p = p.reshape(r.shape)
+    
+    return p
+    
     
         
 def visualize_slice(r, s):
@@ -180,7 +192,7 @@ def make_chunks(R, n_chunks):
     return C
 
 
-def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1, SaveDir = None):
+def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1, classify = False, SaveDir = None):
     
     t0 = time.time()
     
@@ -189,7 +201,7 @@ def run_segmenter(R, models, N = 2, n_high = 1, thresh_proba = 0.9, n_chunks = 1
                                segment_,
                                model = models[N-1],
                                n_highest = n_high,
-                               thresh_proba = thresh_proba)
+                               thresh_proba = thresh_proba, classify = classify)
 
     nz, ny, nx = R.shape        
     R_chunk = make_chunks(R, n_chunks)
