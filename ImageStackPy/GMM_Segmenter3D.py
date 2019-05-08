@@ -153,7 +153,7 @@ def get_class(r, model):
     idx = np.argsort(model.means_[:,0])
     
     p = model.predict_proba(r.reshape(-1,1))[:,idx]
-    p = np.argmax(r, axis = 1)
+    p = np.argmax(p, axis = 1)
     p = p.reshape(r.shape)
     
     return p
