@@ -577,7 +577,7 @@ def threshold(Im_Stack, a_th, a0 = None, a1 = None):
 
 def modified_autocontrast(Im_Stack, s = 0.01, plot_flag = False):
     
-    
+    # return: alow, ahigh values to clamp data
     # s: quantile of image data to saturate. E.g. s = 0.01 means saturate the lowest 1% and highest 1% pixels
     message(BORDER)
     message("\nPerforming modified auto-contrast adjustment...")
@@ -603,22 +603,7 @@ def modified_autocontrast(Im_Stack, s = 0.01, plot_flag = False):
     alow = bins[ibin_low]
     ahigh = bins[ibin_high]
     
-    #S = clamp(S, limit_low = alow, limit_high = ahigh)
-    S = toArray(Parallelize(S, np.clip, a_min = alow, a_max = ahigh))
-    
-    if plot_flag == True:
-        plt.figure()
-        h1 = plt.hist(np.asarray(Im_Stack).ravel(), bins = 500)
-        h2 = plt.hist(np.asarray(S).ravel(), bins = 500)
-        plt.xlabel('Intensity')
-        plt.ylabel('Number of pixels')
-        plt.title('Histogram')
-    
-    S = np.asarray(S, dtype = data_type)
-    
-    S = toStack(S)
-
-    return S
+    return alow, ahigh
     
 
 def calc_EnsembleStack(Im_Stack, FPE, ret_type = INT16, ensemble_type = 'mean'):
