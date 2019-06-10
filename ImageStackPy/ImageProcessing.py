@@ -604,7 +604,7 @@ def modified_autocontrast(Im_Stack, s = 0.01, plot_flag = False):
     ahigh = bins[ibin_high]
     
     #S = clamp(S, limit_low = alow, limit_high = ahigh)
-    S = IP.toArray(IP.Parallelize(S, np.clip, a_min = alow, a_max = ahigh))
+    S = toArray(Parallelize(S, np.clip, a_min = alow, a_max = ahigh))
     
     if plot_flag == True:
         plt.figure()
