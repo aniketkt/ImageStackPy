@@ -155,8 +155,12 @@ def save_stack(Im_Stack, SaveDir = '', increment_flag = False, suffix_len = None
     
     if dtype == INT8:
         Im_Stack = to8bit(Im_Stack)
-    else:
+    elif dtype == INT16:
         Im_Stack = to16bit(Im_Stack)
+    elif dtype == FLOAT32:
+        Im_Stack = tofloat32(Im_Stack)
+    else:
+        raise ValueError("Data type requested not recognized.")
 
     
     
@@ -483,6 +487,21 @@ def to16bit(Im_Stack, auto_adjust = False, method = None, norm_type = "global"):
         return []
     
     Im_Stack = np.asarray(Im_Stack).astype(np.uint16)
+    Im_Stack = toStack(Im_Stack)
+    
+    return Im_Stack
+
+def tofloat32(Im_Stack):
+    
+    
+    # Type casting to 32 bit float:
+    
+    Im_Stack = toStack(Im_Stack)
+
+    if (type(Im_Stack[0][0,0]) is np.float32):
+        return Im_Stack
+        
+    Im_Stack = np.asarray(Im_Stack).astype(np.float32)
     Im_Stack = toStack(Im_Stack)
     
     return Im_Stack
