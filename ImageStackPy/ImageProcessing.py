@@ -247,7 +247,7 @@ def save_image(Img, SaveFileName = '', dtype = None):
         Img = to16bit(Img)
     elif dtype == INT8:
         Img = to8bit(Img)
-    elif dtype = FLOAT32:
+    elif dtype == FLOAT32:
         Img = tofloat32(Img)
         
     Img = Img[0]
