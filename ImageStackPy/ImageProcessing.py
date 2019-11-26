@@ -233,7 +233,7 @@ def save_stack(Im_Stack, SaveDir = ''): #Pass LogFileName as savedir for PyNM_FU
 """
 
 
-def save_image(Img, SaveFileName = ''):
+def save_image(Img, SaveFileName = '', dtype = None):
 
     message(BORDER)
     message("\nSaving image...")
@@ -243,8 +243,13 @@ def save_image(Img, SaveFileName = ''):
         return
     
     Img = toStack(Img)
-    
-    Img = to16bit(Img)
+    if dtype == INT16:
+        Img = to16bit(Img)
+    elif dtype == INT8:
+        Img = to8bit(Img)
+    elif dtype = FLOAT32:
+        Img = tofloat32(Img)
+        
     Img = Img[0]
     imsave(SaveFileName + '.tif', Img)
 
