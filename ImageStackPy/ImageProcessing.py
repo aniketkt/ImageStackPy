@@ -804,6 +804,7 @@ def Parallelize(ListIn, f, procs = -1, **kwargs):
     
     if procs == -1:
         procs = Opt_Procs(len(ListIn))
+    print("Deploying %i processors"%procs)
         
 
     if procs == 1:
