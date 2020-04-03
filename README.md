@@ -1,7 +1,7 @@
 # ImageStackPy
 ### Modules to view and process large image stacks. Fast, parallelized filters and an object tracking algorithm.
 
-If you find yourself post-processing stacks of greyscale images such as those arising from high-speed imaging experiments, or video recordings and need to parallelize functions in opencv / skimage / numpy over a workstation, you might find my repository useful. Also, I offer easy-to-use functions to generate a motion trajectory of an object moving in the video sequence.
+Library for post-processing stacks of greyscale images such as those arising from high-speed imaging experiments, or video recordings and need to parallelize functions in opencv / skimage / numpy.
 
 ImageProcessing.py file includes the following important functions, all of them are parallelized using multiprocessing library (somewhat similar to how you parallelized the template match algorithm)
  
@@ -18,15 +18,13 @@ ObjectTracking.py file includes an object tracking algorithm using normalized cr
 
 Img_Viewer.py contains functions to view image stacks in a slider window using matplotlib interactive widgets. You can also view the histogram, plot profile of pixel intensity across images, etc.
 
-I define an image stack as a python list of 2D numpy arrays with identical shape - I(Z,Y,X). The 'Z axis' is the python list.
+An image stack is defined  as a python list of 2D numpy arrays with identical shape - I(Z,Y,X). The 'Z axis' is the python list.
 
-Installation:
-Use python 3.3+ 
-In an environment type,
+####Installation:
+
+Use a dedicated python 3 environment,
 
 pip install git+https://github.com/aniketkt/ImageStackPy.git#egg=ImageStackPy
-
-
 
 Example:
 from ImageStackPy import ImageProcessing as IP
