@@ -20,7 +20,7 @@ Img_Viewer.py contains functions to view image stacks in a slider window using m
 
 An image stack is defined  as a python list of 2D numpy arrays with identical shape - I(Z,Y,X). The 'Z axis' is the python list.
 
-###Installation:
+### Installation:
 
 Use a dedicated python 3 environment,
 
