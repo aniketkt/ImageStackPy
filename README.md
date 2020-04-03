@@ -1,5 +1,5 @@
 # ImageStackPy
-### This repository is a part of CTSegNet (http://github.com/aniketkt/CTSegNet).
+### This repository is a part of CTSegNet (http://github.com/aniketkt/CTSegNet), but can be installed separately. Refer to the instructions below.
 ### Modules to view and process large image stacks. Fast, parallelized filters and an object tracking algorithm.
 
 If you find yourself post-processing stacks of greyscale images such as those arising from high-speed imaging experiments, or video recordings and need to parallelize functions in opencv / skimage / numpy over a workstation, you might find my repository useful. Also, I offer easy-to-use functions to generate a motion trajectory of an object moving in the video sequence.
