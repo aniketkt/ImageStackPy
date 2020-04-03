@@ -1,7 +1,9 @@
 # ImageStackPy
-Modules to view and process large image stacks. Fast, parallelized filters and an object tracking algorithm.
+### This repository is a part of CTSegNet (http://github.com/aniketkt/CTSegNet).
+### Modules to view and process large image stacks. Fast, parallelized filters and an object tracking algorithm.
 
-If you find yourself post-processing stacks of greyscale images such as those arising from high-speed imaging experiments, or video recordings and find that writing loops or list comprehensions over image processing functions in the opencv or skimage libraries does not utilized your processor efficiently, you might find my repository useful. Also, I offer easy-to-use functions to generate a motion trajectory of an object moving in the video sequence.
+If you find yourself post-processing stacks of greyscale images such as those arising from high-speed imaging experiments, or video recordings and need to parallelize functions in opencv / skimage / numpy over a workstation, you might find my repository useful. Also, I offer easy-to-use functions to generate a motion trajectory of an object moving in the video sequence.
+
 ImageProcessing.py file includes the following important functions, all of them are parallelized using multiprocessing library (somewhat similar to how you parallelized the template match algorithm)
  
 The "PyImageProcessing.py" file contains:
